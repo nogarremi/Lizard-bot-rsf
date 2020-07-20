@@ -1,4 +1,5 @@
 from utilities import (register, bold, read_db, save_db, settings_exist)
+from pprint import pformat
 
 # All @register() are a product of reviewing Yaksha
 # See utilities.register for more information
@@ -52,4 +53,17 @@ async def get_users(command, msg, user, channel, *args, **kwargs):
     for user in users:
         userList.update({user.name + '#' + str(user.discriminator): user.display_name})
 
-    return userList
+    prettyList = pformat(userList)
+
+    if len(prettyList) > 2000:
+        print(prettyList[:2000])
+    else:
+        print(prettyList)
+        
+    return 'Hi!'
+    
+@register('test')
+async def test(command, msg, user, channel, *args, **kwargs):
+    for role in user.roles:
+        print(role.name + ': ' + str(role.id))
+    return "testing complete"
