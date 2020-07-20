@@ -51,9 +51,9 @@ async def prefix(command, msg, user, channel, *args, **kwargs):
 @register('get-users')
 async def get_users(command, msg, user, channel, *args, **kwargs):
     users = kwargs['full_msg'].guild.members
-    userList = "\u200B"
+    userList = {}
 
     for user in users:
-        userList += '\n' + user.name + '#' + str(user.discriminator) + ': ' + user.display_name
+        userList.update({user.name + '#' + str(user.discriminator): user.display_name})
 
     return userList
