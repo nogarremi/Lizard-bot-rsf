@@ -1,6 +1,5 @@
 import commands
 import utilities
-import os
 
 # Yaksha
 class Interface():

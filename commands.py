@@ -1,8 +1,4 @@
 from utilities import (register, bold, read_db, save_db, settings_exist)
-import asyncio
-import random
-import pprint
-import json
 
 # All @register() are a product of reviewing Yaksha
 # See utilities.register for more information

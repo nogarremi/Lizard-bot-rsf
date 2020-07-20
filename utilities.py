@@ -1,4 +1,3 @@
-import re
 import pymysql.cursors # Use for DB connections
 from secret import sql_host,sql_port,sql_user,sql_pw,sql_database # Store secret information
 
