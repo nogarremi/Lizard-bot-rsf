@@ -4,7 +4,7 @@ import json
 
 import interface
 from utilities import read_db,settings_exist
-from secret import token
+from secret import bot
 
 client = discord.Client()
 
@@ -24,12 +24,12 @@ async def on_message(message):
 
     # Check if the channel is in the DB
     # Add it if it isn't
-    if not settings_exist(message.guild.id, message.channel.id):
+    if not settings_exist(message.guild.id):
         await chan.send("Oops, I'm broken")
         print("Oops, I'm broken")
 
     # Get prefix for the guild
-    prefix = read_db('guild', 'prefix-lizard', message.guild.id)
+    prefix = read_db('prefix-nog', message.guild.id)
 
     if not message.content.startswith(prefix):
         return
@@ -67,7 +67,7 @@ def main():
     client.interface = interface.Interface(config, client.commands)
 
     # Start the bot
-    client.run(token)
+    client.run(bot)
 
 # If main is here, run main
 if __name__ == '__main__':

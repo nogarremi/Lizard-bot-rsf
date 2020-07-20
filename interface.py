@@ -65,7 +65,7 @@ class Interface():
             except Exception:
                 # If we get this far and something breaks
                 # Something is very wrong
-                return "Sorry, that command didn't work. Ask LizardMan301 to fix it."
+                return "Sorry, that command didn't work. Ask Nogarremi to fix it."
 
     def user_has_permission(self, user, command, id):
         '''
@@ -75,7 +75,7 @@ class Interface():
         # Check if the user is an admin and if the command is
         # an admin command.
         if command in self.admin_commands:
-            botrole = utilities.read_db('guild', 'botrole', id)
+            botrole = utilities.read_db('botrole', id)
 
             # If botrole is not set, allow the command
             if not botrole:

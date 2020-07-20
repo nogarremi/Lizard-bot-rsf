@@ -1,21 +1,13 @@
 {
 	"admin_commands": {
 		"botrole":"",
-		"coin-flip":"",
 		"edit":"",
-		"prefix-lizard":"",
-		"refresh":"",
-		"remind":"",
-		"reset":"",
-		"round":""
+		"get-users":"",
+		"prefix-nog":""
 	},
 	"common_commands": {
-		"bracket":"",
-		"help-lizard":"",
-		"lizardman":"",
-		"pingtest":"",
-		"status":"",
-		"stream":"",
-		"TOs":""
+		"help-nog":"",
+		"ping-nog":"",
+		"test":""
 	}
 }
