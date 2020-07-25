@@ -28,6 +28,15 @@ def get_callbacks():
 def bold(string):
     return "**" + string + "**"
 
+def get_users(msg):
+    users = msg.guild.members
+    userDict = {}
+
+    for user in users:
+        userDict.update({user.name + '#' + str(user.discriminator): user.display_name.lower()})
+
+    return userDict
+
 # Create a connection to the database
 def make_conn():
     return pymysql.connect(host=sql_host, port=sql_port, user=sql_user, password=sql_pw, db=sql_database, charset='utf8mb4', autocommit=True, cursorclass=pymysql.cursors.DictCursor)

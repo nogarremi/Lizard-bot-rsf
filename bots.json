@@ -2,12 +2,11 @@
 	"admin_commands": {
 		"botrole":"",
 		"edit":"",
-		"get-users":"",
-		"prefix-nog":""
+		"prefix-nog":"",
+		"test":""
 	},
 	"common_commands": {
 		"help-nog":"",
-		"ping-nog":"",
-		"test":""
+		"ping-nog":""
 	}
 }
