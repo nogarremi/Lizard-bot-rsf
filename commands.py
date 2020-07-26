@@ -50,33 +50,29 @@ async def edit(command, msg, user, channel, *args, **kwargs):
 async def prefix(command, msg, user, channel, *args, **kwargs):
     return "The prefix is: {0}".format(read_db(command, kwargs['guild']))
 
-@register('test')
-async def get_tour(command, msg, user, channel, *args, **kwargs):
-    url = msg.split(' ')[0]
-    base_url = "https://api.challonge.com/v1/"
-    current_time = datetime.datetime.now()
-    last_saturday = str(current_time.date()
-        - datetime.timedelta(days=current_time.weekday())
-        + datetime.timedelta(days=5, weeks=-1))
-    parts = []
+@register('challonge')
+async def challonge(command, msg, user, channel, *args, **kwargs):
+    subcommand = msg.split(' ')[0]
+    tour_url = msg.split(' ')[1]
+    subdomain = read_db(command, kwargs['guild'])
+    base_url = "https://api.challonge.com/v1/tournaments/"
 
-    payload = {'api_key':api_key, 'state':'pending'}
     if subdomain:
-        payload.update({'subdomain': subdomain})
-    tours_get = requests.get(base_url + "tournaments.json", params=payload)
-    if '200' in str(tours_get.status_code):
-        if url in [tours_get.json()[tour]['tournament']['url'] for tour in range(len(tours_get.json()))]:
-            for t in tours_get.json():
-                t = t['tournament']
-                if t['url'] not in [url]:
-                    continue
-
-                parts_get = requests.get(base_url + "tournaments/" + str(t['id']) + "/participants.json", params={'api_key':api_key})
-                if '200' in str(parts_get.status_code):
-                    for p in parts_get.json():
-                        p = p['participant']
-                        if p['name'].lower() not in get_users(kwargs['full_msg']).values():
-                            parts.append(p['name'])
-                    await channel.send("**NOT IN DISCORD:** {0}".format(', '.join(parts)))
+        tour_url = subdomain + '-' + tour_url
+    parts_get = requests.get(base_url + tour_url + "/participants.json", params={'api_key':api_key})
+    if '200' in str(parts_get.status_code):
+        if subcommand in 'checkin':
+            discord_parts = []
+            checked_parts = []
+            for p in parts_get.json():
+                p = p['participant']
+                if not p['checked_in']:
+                    checked_parts.append(p['name'])
+                if p['name'].lower() not in get_users(kwargs['full_msg']).values():
+                    discord_parts.append(p['name'])
+            return_msg = "**NOT CHECKED IN:** {0}\n**NOT IN DISCORD:** {1}".format(', '.join(checked_parts), ', '.join(discord_parts))
+        elif subcommand in 'seed':
+            return_msg = "Not implemented yet"
         else:
-            await channel.send(bold("INVALID TOURNAMENT"))
+            return_msg = "Invalid command"
+        await channel.send(return_msg)

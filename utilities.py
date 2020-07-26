@@ -1,5 +1,6 @@
 import pymysql.cursors # Use for DB connections
-from secret import sql_host,sql_port,sql_user,sql_pw,sql_database # Store secret information
+from secret import sql_host,sql_port,sql_user,sql_pw,sql_database, api_key # Store secret information
+import requests
 
 _callbacks = {} # Yaksha
 
@@ -33,7 +34,7 @@ def get_users(msg):
     userDict = {}
 
     for user in users:
-        userDict.update({user.name + '#' + str(user.discriminator): user.display_name.lower()})
+        userDict.update({user.mention: user.display_name.lower()})
 
     return userDict
 
