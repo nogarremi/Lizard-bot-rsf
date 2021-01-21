@@ -1,3 +1,6 @@
+# I was added as a collaborator to lizardman301/Lizard-bot-rsf. I will maintain the master branch and my own branch over there
+
+
 # Lizard-BOT
 
 Simple discord bot originally built for the [Online Local](https://twitter.com/theonlinelocal) (formerly r/StreetFighter) East Coast SFV weekly tournament to help players see current round and with some commands for TOs. Support for multiple channels to run multiple tournaments at once and allows for custom prefixes, round flavor text, and more. Requires discord.py and pymysql.
